@@ -1,4 +1,0 @@
-package Estacionamiento;
- class Lector {
-     
- }
