@@ -5,7 +5,7 @@
 export const environment = {
   production: false,
   firebase: {
-    apiKey: 'AIzaSyB5xJR4qirHZNY6lGHtjeRG7WkRPxkDHXs',
+    apiKey: 'AIzaSyB5xJR4qirHZNY6lGHtjeRG7WkRPxk',
     authDomain: 'platzisquare-92d96.firebaseapp.com',
     databaseURL: 'https://platzisquare-92d96.firebaseio.com',
     projectId: 'platzisquare-92d96',
