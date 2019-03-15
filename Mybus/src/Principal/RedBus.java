@@ -12,6 +12,7 @@ package Principal;
 public class RedBus extends Tarjeta {
 
     private int viajes;
+    private int moneda;
 
     public RedBus(int saldo) {
         super(saldo);
@@ -20,6 +21,10 @@ public class RedBus extends Tarjeta {
         } else {
             saldo = 0;
         }
+    }
+    
+    public void serMoneda(int moneda){
+        this.moneda = moneda;
     }
 
     public RedBus() {

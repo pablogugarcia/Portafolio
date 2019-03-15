@@ -18,12 +18,10 @@ public class Main {
     static Client client;
     static Reader reader;
     static Vehicle v;
-
-    /**
-     * @param args the command line arguments
-     */
+    
     public static void main(String[] args) {
 
+        client = new Client();
         int op = 0;
         do {
             System.out.println("Ingrese Opcion : ");
@@ -64,7 +62,8 @@ public class Main {
     public static void loadParkingData() {
         try {
             System.out.println("Ingrese cantidad de lugares disponibles : ");
-            park = new Park(sc.nextInt());
+            int l = sc.nextInt();
+            park = new Park(l);
         } catch (Exception e) {
             System.out.println("No es un numero, reingrese");
             sc = new Scanner(System.in);  // Se instancia de nuevo el objeto Scanner para limpiarlo del errory que no corte el programa

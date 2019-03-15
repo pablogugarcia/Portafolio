@@ -24,10 +24,14 @@ public class Client {
         this.plan = plan;
         this.vehicle = vehicle; 
     }
+    public Client (){
+        
+    }
     
     public void createClient () {
         
        // if ()
+       vehicle = new Car ("12312312","Toyota");
     }
 
     @Override
