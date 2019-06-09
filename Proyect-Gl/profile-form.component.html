@@ -1,0 +1,116 @@
+<div class="mat-card mat-elevation-z4 w-100-p p-24 mr-24">
+
+  <form mat-form [formGroup]="formUser" fxLayout="column" fxLayoutAlign="start">
+    <h2>PERFIL</h2>
+
+    <div fxLayout="row wrap" fxLayoutAlign="start center" fxFlex="1 0 auto">
+
+      <mat-form-field appearance="outline" fxFlex="100" fxFlex.gt-sm="50" class="pr-md-24">
+        <mat-label>Nombre</mat-label>
+        <input matInput formControlName="firstName" required>
+        <mat-error>Nombre requerido</mat-error>
+      </mat-form-field>
+
+      <mat-form-field appearance="outline" fxFlex="100" fxFlex.gt-sm="50">
+        <mat-label>Apellido</mat-label>
+        <input matInput formControlName="lastName" required>
+        <mat-error>Apellido requerido</mat-error>
+      </mat-form-field>
+
+      <mat-form-field appearance="outline" fxFlex="100" fxFlex.gt-sm="50" class="pr-md-24">
+        <mat-label>E-Mail</mat-label>
+        <input matInput formControlName="email" type="email" required>
+        <mat-error>E-Mail requerido</mat-error>
+      </mat-form-field>
+
+      <mat-form-field appearance="outline" fxFlex="100" fxFlex.gt-sm="50">
+        <mat-label>Telefono</mat-label>
+        <input type="tel" matInput formControlName="phone">
+        <mat-error>Telefono requerido</mat-error>
+      </mat-form-field>
+
+      <mat-form-field appearance="outline" fxFlex="100" fxFlex.gt-sm="50" class="pr-md-24">
+        <mat-label>Compañia</mat-label>
+        <input matInput formControlName="company" [readonly]="true">
+        <mat-error>Compañia requerido</mat-error>
+      </mat-form-field>
+
+      <mat-form-field appearance="outline" fxFlex="100" fxFlex.gt-sm="50">
+        <mat-label>Celular</mat-label>
+        <mat-error>Celular requerido</mat-error>
+        <input matInput type="phone" formControlName="cellphone">
+      </mat-form-field>
+
+
+      <mat-form-field appearance="outline" fxFlex="100" fxFlex.gt-sm="50" class="pr-md-24">
+        <mat-label>Interno</mat-label>
+        <input matInput formControlName="extension">
+        <mat-error>Interno requerido</mat-error>
+
+      </mat-form-field>
+
+      <mat-form-field appearance="outline" fxFlex="100" fxFlex.gt-sm="50" class="pr-md-24">
+        <mat-label>Area</mat-label>
+        <mat-select formControlName="areaId" required>
+          <mat-option *ngFor="let area of areas" [value]="area.id">{{area.name}}</mat-option>
+        </mat-select>
+        <mat-error>Area requerido</mat-error>
+      </mat-form-field>
+
+      <mat-form-field appearance="outline" fxFlex="100" fxFlex.gt-sm="50" class="pr-md-24">
+        <mat-label>Legajo</mat-label>
+        <input matInput formControlName="file">
+        <mat-error>Legajo requerido</mat-error>
+      </mat-form-field>
+
+    </div>
+
+
+    <div class="text-center">
+      <button mat-raised-button id="button-save-user" color="accent" [disabled]="formUser.invalid || formUser.pristine"
+        (click)="toSaveDataUser()">Cambiar Datos</button>
+    </div>
+
+  </form>
+  <form mat-form class="pb-24" [formGroup]="passwordUser" fxLayout="column" fxLayoutAlign="center">
+    <h2>DATOS DE ACCESO</h2>
+
+    <div fxLayout="row wrap" fxLayoutAlign="start center" fxFlex="1 0 auto">
+
+      <mat-form-field appearance="outline" fxFlex="100" fxFlex.gt-sm="33" class="pr-md-24">
+        <mat-label>Contraseña actual</mat-label>
+        <input matInput formControlName="oldPassword" required [type]="hide ? 'password' : 'text'">
+        <mat-error *ngIf="passwordUser.get('oldPassword').hasError('required')">Contraseña actual requerida</mat-error>
+        <mat-error *ngIf="passwordUser.get('oldPassword').hasError('minlength')">Minimo 8 caracteres</mat-error>
+        <mat-icon matSuffix (click)="hide = !hide">{{hide ? 'visibility_off' : 'visibility'}}</mat-icon>
+      </mat-form-field>
+      <mat-form-field appearance="outline" fxFlex="100" fxFlex.gt-sm="33" class="pr-md-24">
+        <mat-label>Nueva contraseña</mat-label>
+        <input matInput formControlName="newPassword1"
+          (change)="passwordUser.get('newPassword2').updateValueAndValidity()" required
+          [type]="hide ? 'password' : 'text'">
+        <mat-error *ngIf="passwordUser.get('newPassword2').hasError('requiered')">Ingrese una nueva contraseña
+        </mat-error>
+        <mat-error *ngIf="passwordUser.get('newPassword1').hasError('minlength')">Minimo 8 caracteres</mat-error>
+        <mat-icon matSuffix (click)="hide = !hide">{{hide ? 'visibility_off' : 'visibility'}}</mat-icon>
+      </mat-form-field>
+
+      <mat-form-field appearance="outline" fxFlex="100" fxFlex.gt-sm="33">
+        <mat-label>Repetir nueva contraseña</mat-label>
+        <input matInput formControlName="newPassword2" appConfirmEqualValidator="newPassword1" required
+          [type]="hide ? 'password' : 'text'">
+        <mat-error *ngIf="passwordUser.get('newPassword2').hasError('notEqual')">Las contraseñas no coinciden
+        </mat-error>
+        <mat-error *ngIf="passwordUser.get('newPassword2').hasError('requiered')">Ingrese una nueva contraseña
+        </mat-error>
+        <mat-error *ngIf="passwordUser.get('newPassword2').hasError('minlength')">Minimo 8 caracteres</mat-error>
+        <mat-icon matSuffix (click)="hide = !hide">{{hide ? 'visibility_off' : 'visibility'}}</mat-icon>
+      </mat-form-field>
+    </div>
+
+    <div class="text-center">
+      <button mat-raised-button color="accent" [disabled]="passwordUser.invalid" (click)="passwordChange()">Cambiar
+        Contraseña</button>
+    </div>
+  </form>
+</div>
